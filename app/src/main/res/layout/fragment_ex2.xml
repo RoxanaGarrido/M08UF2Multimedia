@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Ex2Fragment">
+
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="50sp"
+            android:layout_marginLeft="20sp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/tvSensorName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="80sp"
+                    android:text="Nombre de Sensor"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="20sp"/>
+
+                <Switch
+                    android:id="@+id/switch1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Apagado" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20sp">
+
+                <TextView
+                    android:id="@+id/tvX"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Coordenada X: " />
+
+                <TextView
+                    android:id="@+id/tvXValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Value" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20sp">
+
+                <TextView
+                    android:id="@+id/tvY"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Coordenada Y: " />
+
+                <TextView
+                    android:id="@+id/tvYValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Value" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20sp">
+
+                <TextView
+                    android:id="@+id/tvZ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Coordenada Z: " />
+
+                <TextView
+                    android:id="@+id/tvZValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Value" />
+
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20sp">
+
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20sp">
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/rbAccel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ACCELEROMETER" />
+
+                    <RadioButton
+                        android:id="@+id/rbGrav"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="GRAVITY" />
+
+                    <RadioButton
+                        android:id="@+id/rbGy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="GYROSCOPE" />
+
+                    <RadioButton
+                        android:id="@+id/rbLinearAcc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="LINEAR ACCELERATION" />
+
+                    <RadioButton
+                        android:id="@+id/rbRota"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ROTATION VECTOR" />
+
+                    <RadioButton
+                        android:id="@+id/rbMotion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="SIGNIFICANT MOTION" />
+
+                    <RadioButton
+                        android:id="@+id/rbStepC"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="STEP COUNTER" />
+
+                    <RadioButton
+                        android:id="@+id/rbStepD"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="STEP DETECTOR" />
+
+                    <RadioButton
+                        android:id="@+id/rbMag"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="MAGNETOMETER " />
+
+                </RadioGroup>
+
+            </TableRow>
+        </TableLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/menuFragment">
+
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="cat.copernic.rgarrido.m08uf2multimedia.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_ex1Fragment"
+            app:destination="@id/ex1Fragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_ex2Fragment"
+            app:destination="@id/ex2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ex1Fragment"
+        android:name="cat.copernic.rgarrido.m08uf2multimedia.Ex1Fragment"
+        android:label="fragment_ex1"
+        tools:layout="@layout/fragment_ex1" />
+    <fragment
+        android:id="@+id/ex2Fragment"
+        android:name="cat.copernic.rgarrido.m08uf2multimedia.Ex2Fragment"
+        android:label="fragment_ex2"
+        tools:layout="@layout/fragment_ex2" />
+</navigation>
