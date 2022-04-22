@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_menuFragment_to_ex2Fragment"
             app:destination="@id/ex2Fragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_ex3Fragment"
+            app:destination="@id/ex3Fragment" />
     </fragment>
     <fragment
         android:id="@+id/ex1Fragment"
@@ -27,4 +30,9 @@
         android:name="cat.copernic.rgarrido.m08uf2multimedia.Ex2Fragment"
         android:label="fragment_ex2"
         tools:layout="@layout/fragment_ex2" />
+    <fragment
+        android:id="@+id/ex3Fragment"
+        android:name="cat.copernic.rgarrido.m08uf2multimedia.Ex3Fragment"
+        android:label="fragment_ex3"
+        tools:layout="@layout/fragment_ex3" />
 </navigation>

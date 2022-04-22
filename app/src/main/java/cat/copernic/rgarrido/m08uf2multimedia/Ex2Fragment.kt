@@ -1,17 +1,18 @@
 package cat.copernic.rgarrido.m08uf2multimedia
 
-import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
 import cat.copernic.rgarrido.m08uf2multimedia.databinding.FragmentEx2Binding
 
@@ -21,11 +22,10 @@ class Ex2Fragment : Fragment(), SensorEventListener {
     private val sharedViewModel: SensorsViewModel by activityViewModels()
     lateinit var sensorManager: SensorManager
     lateinit var sensor: Sensor
-    public var switchOn:Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sensorManager = sharedViewModel.sensorManager
+
     }
 
     override fun onCreateView(
@@ -36,94 +36,93 @@ class Ex2Fragment : Fragment(), SensorEventListener {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        sensorManager = sharedViewModel.sensorManager
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.myViewModel = sharedViewModel
 
         binding.switch1.setOnCheckedChangeListener{ buttonView, isChecked ->
             if(isChecked){
                 sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
                 binding.switch1.text = "Encendido"
-                switchOn = true
+                binding.rgGroup.isEnabled = false
             }else{
                 sensorManager.unregisterListener(this)
                 binding.switch1.text = "Apagado"
-                switchOn = false
+                binding.rgGroup.isEnabled = true
             }
         }
 
+        binding.rgGroup.setOnCheckedChangeListener(
+            RadioGroup.OnCheckedChangeListener { group, checkedId ->
+                if(checkedId == binding.rbAccel.id){
+                 sensorSoportado(Sensor.TYPE_ACCELEROMETER)
+                }
+                if(checkedId == binding.rbGrav.id){
+                    sensorSoportado(Sensor.TYPE_GRAVITY)
+                }
+                if(checkedId == binding.rbGy.id){
+                   sensorSoportado(Sensor.TYPE_GYROSCOPE)
+                }
+                if(checkedId == binding.rbLinearAcc.id){
+                   sensorSoportado(Sensor.TYPE_LINEAR_ACCELERATION)
+                }
+                if(checkedId == binding.rbRota.id){
+                    sensorSoportado(Sensor.TYPE_ROTATION_VECTOR)
+                }
+                if(checkedId == binding.rbMotion.id){
+                    sensorSoportado(Sensor.TYPE_MOTION_DETECT)
+                }
+                if(checkedId == binding.rbStepC.id){
+                    sensorSoportado(Sensor.TYPE_STEP_COUNTER)
+                }
+                if(checkedId == binding.rbStepD.id){
+                    sensorSoportado(Sensor.TYPE_STEP_DETECTOR)
+                }
+                if(checkedId == binding.rbMag.id){
+                    sensorSoportado(Sensor.TYPE_MAGNETIC_FIELD)
+                }
+            })
     }
-/*
-     fun onRadioButtonClick(view: View) {
-        if (view is RadioButton) {
-            // Is the button now checked?
-            val checked = view.isChecked
 
-            // Check which radio button was clicked
-            when (view.getId()) {
-                binding.rbAccel.id ->
-                    if (checked) {
-                        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-                        mostrarSensor(sensor, switchOn)
-                    }
-            }
-        }
-    }
-    
-    private fun seleccionarSensor() {
-        if(binding.rbAccel.isChecked){
-            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-            mostrarSensor(sensor)
-        }
-        if(binding.rbGrav.isChecked){
-            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY)
-            mostrarSensor(sensor)
-        }
-        if(binding.rbGy.isChecked){
-            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
-            mostrarSensor(sensor)
-        }
-        if(binding.rbLinearAcc.isChecked){
-            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION)
-            mostrarSensor(sensor)
-        }
-        if(binding.rbMag.isChecked){
-            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
-            mostrarSensor(sensor)
-        }
-        if(binding.rbMotion.isChecked){
-            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_MOTION_DETECT)
-            mostrarSensor(sensor)
-        }
-        if(binding.rbRota.isChecked){
-            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
-            mostrarSensor(sensor)
-        }
-        if(binding.rbStepC.isChecked){
-            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
-            mostrarSensor(sensor)
-        }
-        if(binding.rbStepD.isChecked){
-            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)
-            mostrarSensor(sensor)
-        }
-    }
-    */
+    @RequiresApi(Build.VERSION_CODES.N)
+    fun sensorSoportado(id: Int){
+        if( sharedViewModel.compruebaSensors(id) ) {
+            sensor = sensorManager.getDefaultSensor(id)
+            sharedViewModel.SensorName.value = sensor.name
+            Toast.makeText(
+                activity, "${sensor.stringType}",
+                Toast.LENGTH_SHORT
+            ).show()
 
-
-    private fun mostrarSensor(sensor: Sensor, switch: Boolean){
-        binding.tvSensorName.text = sensor.name
-        //values
-        if(switch){
-            Toast.makeText(sharedViewModel.activityContext, "Aceleracion", Toast.LENGTH_SHORT).show()
+        }else {
+            Toast.makeText(
+                activity, "Sensor no soportado!",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
-    override fun onSensorChanged(p0: SensorEvent?) {
-        TODO("Not yet implemented")
+    override fun onSensorChanged(event: SensorEvent?) {
+    if(event != null){
+        binding.tvXValue.text = String.format("%.3f", event.values[0])
+        binding.tvYValue.text = String.format("%.3f", event.values[1])
+        binding.tvZValue.text = String.format("%.3f", event.values[2])
+    }
     }
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
-        TODO("Not yet implemented")
+       return
+    }
+
+    override fun onPause() {
+        super.onPause()
+        sensorManager.unregisterListener(this)
+        binding.switch1.isChecked = false
     }
 
 }

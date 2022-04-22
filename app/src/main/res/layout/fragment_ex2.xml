@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="MyViewModel"
+            type="cat.copernic.rgarrido.m08uf2multimedia.SensorsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,9 +31,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="80sp"
-                    android:text="Nombre de Sensor"
                     android:textSize="20sp"
-                    android:layout_marginBottom="20sp"/>
+                    android:layout_marginBottom="20sp"
+                    android:text="@{MyViewModel.sensorName}"/>
 
                 <Switch
                     android:id="@+id/switch1"
@@ -114,6 +116,7 @@
                 android:layout_marginTop="20sp">
 
                 <RadioGroup
+                    android:id="@+id/rgGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
@@ -121,6 +124,7 @@
                         android:id="@+id/rbAccel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:checked="true"
                         android:text="ACCELEROMETER" />
 
                     <RadioButton

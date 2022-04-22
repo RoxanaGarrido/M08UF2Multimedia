@@ -18,9 +18,6 @@ class MainActivity : AppCompatActivity() {
 
         //Obtener Sensor manager de la activity
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
-        sensorsViewModel.setSensorManager(sensorManager)
-
-        sensorsViewModel.activityContext = this
-
+        sensorsViewModel.sensorManager = sensorManager
     }
 }
