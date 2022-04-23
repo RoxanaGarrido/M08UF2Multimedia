@@ -1,59 +1,98 @@
 package cat.copernic.rgarrido.m08uf2multimedia
 
+import android.graphics.Color
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.activityViewModels
+import cat.copernic.rgarrido.m08uf2multimedia.databinding.FragmentEx3Binding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class Ex3Fragment : Fragment(), SensorEventListener {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Ex3Fragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class Ex3Fragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentEx3Binding
+    lateinit var sensorManager: SensorManager
+    private val sharedViewModel: SensorsViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ex3, container, false)
+        binding = FragmentEx3Binding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Ex3Fragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Ex3Fragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    @RequiresApi(Build.VERSION_CODES.N)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        sensorManager = sharedViewModel.sensorManager
+        SensorSoportado(Sensor.TYPE_PROXIMITY, binding.tvProximity)
+        SensorSoportado(Sensor.TYPE_ORIENTATION, binding.tvOrientation)
+        SensorSoportado(Sensor.TYPE_GAME_ROTATION_VECTOR, binding.tvRotation)
+        SensorSoportado(Sensor.TYPE_LIGHT, binding.tvLight)
+        SensorSoportado(Sensor.TYPE_AMBIENT_TEMPERATURE, binding.tvATemp)
+        SensorSoportado(Sensor.TYPE_TEMPERATURE, binding.tvDTempe)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    fun SensorSoportado(type: Int, text:TextView){
+        var sensor = sensorManager.getDefaultSensor(type)
+        if(!sharedViewModel.compruebaSensors(type)){
+            text.setTextColor(Color.parseColor(sharedViewModel.textColorError))
+        }else{
+            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+        }
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        if(event != null){
+            when(event.sensor.type){
+                Sensor.TYPE_PROXIMITY -> {
+                    binding.tvProximityValue.text = String.format("%.3f", event.values[0])
+                }
+                Sensor.TYPE_ORIENTATION -> {
+                    binding.tvOrientationX.text = String.format("%.3f", event.values[0])
+                    binding.tvOrientationY.text = String.format("%.3f", event.values[1])
+                    binding.tvOrientationZ.text = String.format("%.3f", event.values[2])
+                }
+                Sensor.TYPE_GAME_ROTATION_VECTOR -> {
+                    binding.tvRotationX.text = String.format("%.3f", event.values[0])
+                    binding.tvRotationY.text = String.format("%.3f", event.values[1])
+                    binding.tvRotationZ.text = String.format("%.3f", event.values[2])
+                }
+                Sensor.TYPE_LIGHT -> {
+                    binding.tvLightValue.text = String.format("%.3f", event.values[0])
+                }
+                Sensor.TYPE_AMBIENT_TEMPERATURE -> {
+                    binding.tvATValue.text = String.format("%.3f", event.values[0])
+                }
+                Sensor.TYPE_TEMPERATURE -> {
+                    binding.tvTemValue.text = String.format("%.3f", event.values[0])
                 }
             }
+        }
+    }
+
+    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
+        return
+    }
+
+    override fun onPause() {
+        super.onPause()
+        sensorManager.unregisterListener(this)
     }
 }
+

@@ -75,7 +75,7 @@ class Ex2Fragment : Fragment(), SensorEventListener {
                     sensorSoportado(Sensor.TYPE_ROTATION_VECTOR)
                 }
                 if(checkedId == binding.rbMotion.id){
-                    sensorSoportado(Sensor.TYPE_MOTION_DETECT)
+                    sensorSoportado(Sensor.TYPE_SIGNIFICANT_MOTION)
                 }
                 if(checkedId == binding.rbStepC.id){
                     sensorSoportado(Sensor.TYPE_STEP_COUNTER)

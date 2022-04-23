@@ -1,17 +1,13 @@
 package cat.copernic.rgarrido.m08uf2multimedia
 
-import android.content.Context
-import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import cat.copernic.rgarrido.m08uf2multimedia.databinding.FragmentEx1Binding
 
 
@@ -50,7 +46,7 @@ class Ex1Fragment : Fragment() {
         for (currentSensor in sensorList) {
             //Control de versiones de android
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                sensorText.append("${count} ${currentSensor.name} - ${currentSensor.stringType}")
+                sensorText.append("${count} ${currentSensor.name} - ${currentSensor.stringType}\n")
                     .append(System.getProperty("line.separator")
                 )
             }

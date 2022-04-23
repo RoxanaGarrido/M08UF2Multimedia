@@ -19,6 +19,21 @@
         <action
             android:id="@+id/action_menuFragment_to_ex3Fragment"
             app:destination="@id/ex3Fragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_ex4Fragment2"
+            app:destination="@id/ex4Fragment2" />
+        <action
+            android:id="@+id/action_menuFragment_to_ex5Fragment"
+            app:destination="@id/ex5Fragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_ex6Fragment"
+            app:destination="@id/ex6Fragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_ex8Fragment"
+            app:destination="@id/ex8Fragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_ex9Fragment"
+            app:destination="@id/ex9Fragment" />
     </fragment>
     <fragment
         android:id="@+id/ex1Fragment"
@@ -35,4 +50,29 @@
         android:name="cat.copernic.rgarrido.m08uf2multimedia.Ex3Fragment"
         android:label="fragment_ex3"
         tools:layout="@layout/fragment_ex3" />
+    <fragment
+        android:id="@+id/ex4Fragment2"
+        android:name="cat.copernic.rgarrido.m08uf2multimedia.Ex4Fragment"
+        android:label="fragment_ex4"
+        tools:layout="@layout/fragment_ex4" />
+    <fragment
+        android:id="@+id/ex5Fragment"
+        android:name="cat.copernic.rgarrido.m08uf2multimedia.Ex5Fragment"
+        android:label="fragment_ex5"
+        tools:layout="@layout/fragment_ex5" />
+    <fragment
+        android:id="@+id/ex6Fragment"
+        android:name="cat.copernic.rgarrido.m08uf2multimedia.Ex6Fragment"
+        android:label="fragment_ex6"
+        tools:layout="@layout/fragment_ex6" />
+    <fragment
+        android:id="@+id/ex8Fragment"
+        android:name="cat.copernic.rgarrido.m08uf2multimedia.Ex8Fragment"
+        android:label="fragment_ex8"
+        tools:layout="@layout/fragment_ex8" />
+    <fragment
+        android:id="@+id/ex9Fragment"
+        android:name="cat.copernic.rgarrido.m08uf2multimedia.Ex9Fragment"
+        android:label="fragment_ex9"
+        tools:layout="@layout/fragment_ex9" />
 </navigation>

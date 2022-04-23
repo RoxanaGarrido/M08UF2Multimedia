@@ -8,7 +8,6 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 
 class SensorsViewModel(application: Application): AndroidViewModel(application) {
 
@@ -21,8 +20,12 @@ class SensorsViewModel(application: Application): AndroidViewModel(application) 
 
     var SensorName = MutableLiveData<String>("ACCELEROMETER")
 
+    var textColorError = "#B31F1F"
+
     @RequiresApi(Build.VERSION_CODES.N)
     fun compruebaSensors(id:Int):Boolean{
         return listSensors.any{ it.type == id}
     }
+
+
 }

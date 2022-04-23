@@ -3,6 +3,9 @@
 
     <!-- Sensor list is dynamically built;  this is the placeholder for view -->
     <string name="placeholder_text">(placeholder)</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="start_capture">Photo Delay</string>
+    <string name="stop_capture">Stop Capture</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
